@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy app
-        uses: appleboy/ssh-action@v0.1.2
+        uses: appleboy/ssh-action@v1.0.0
         env:
           MONGO_DB_CS: ${{secrets.MONGO_DB_CS}}
           HOST: ${{secrets.SSH_HOST}}
