@@ -19,7 +19,7 @@ jobs:
           envs: MONGO_DB_CS,HOST
           script: |
             cd repos/media-scrapper-server
-            git pullcd 
+            git pull
             cd MediaScrapperAPI
             jq --arg newValue "$MONGO_DB_CS" '(.MongoDbSettings.ConnectionString) |= $newValue' appsettings.json
             dotnet build --configuration Release
