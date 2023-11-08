@@ -18,9 +18,8 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           env: MONGO_DB_CS,HOST
           script: |
-            mkdir test 
-            cd test 
-            git clone https://github.com/EinsteinBoseCondensate/media-scrapper-server.git
+            cd repos/media-scrapper-server
+            git pull
             cd MediaScrapperAPI
             jq --arg newValue "$MONGO_DB_CS" '(.MongoDbSettings.ConnectionString) |= $newValue' appsettings.json
             dotnet build --Release
