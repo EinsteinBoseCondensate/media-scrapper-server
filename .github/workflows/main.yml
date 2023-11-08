@@ -16,12 +16,12 @@ jobs:
           host: ${{secrets.SSH_HOST}} # IP address of the server you wish to ssh into
           username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
           password: ${{ secrets.SSH_PASSWORD }}
-          env: MONGO_DB_CS,HOST
+          envs: MONGO_DB_CS,HOST
           script: |
             cd repos/media-scrapper-server
-            git pull
+            git pullcd 
             cd MediaScrapperAPI
             jq --arg newValue "$MONGO_DB_CS" '(.MongoDbSettings.ConnectionString) |= $newValue' appsettings.json
-            dotnet build --Release
+            dotnet build --configuration Release
             dotnet run --urls https://$HOST
             echo 'Deployment successful to digital ocean' 
