@@ -23,5 +23,5 @@ jobs:
             cd MediaScrapperAPI
             jq --arg newValue "$MONGO_DB_CS" '(.MongoDbSettings.ConnectionString) |= $newValue' appsettings.json
             dotnet build --configuration Release
-            dotnet run --urls https://$HOST
+            nohup dotnet run --urls https://$HOST > /dev/null 2>&1 &
             echo 'Deployment successful to digital ocean' 
