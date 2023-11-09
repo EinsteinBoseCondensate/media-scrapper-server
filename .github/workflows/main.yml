@@ -25,3 +25,4 @@ jobs:
             dotnet build --configuration Release
             nohup dotnet run --urls https://$HOST > /dev/null 2>&1 &
             echo 'Deployment successful to digital ocean' 
+            exit
