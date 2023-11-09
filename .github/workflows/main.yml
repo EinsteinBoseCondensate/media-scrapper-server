@@ -24,9 +24,9 @@ jobs:
             cd .droplet-scripts
             bash media-scrapper-server-pid-file-handler.sh
             cd ../MediaScrapperAPI
-            jq --arg newValue "$MONGO_DB_CS" '(.MongoDbSettings.ConnectionString) |= $newValue' appsettings.json
+            jq --arg newValue "$MONGO_DB_CS" '(.MongoDbSettings.ConnectionString) |= $newValue' appsettings.json > /dev/null
             echo 'Altered config file with secrets'
             dotnet build --configuration Release
             echo 'App built'
-            nohup dotnet run --urls https://$HOST > /dev/null 2>&1 & echo $! > ../droplet-scripts/media-scrapper-server-pid-file.txt
+            nohup dotnet run --urls https://$HOST > /dev/null 2>&1 & echo $! > ../.droplet-scripts/media-scrapper-server-pid-file.txt
             echo 'Deployment successful to digital ocean' 
