@@ -29,5 +29,5 @@ jobs:
             dotnet build --configuration Release
             echo 'App built'
             cd bin/Release/net7.0/
-            nohup MediaScrapper --urls https://$HOST/ > /dev/null 2>&1 & echo $! > /root/repos/media-scrapper-server/.droplet-scripts/media-scrapper-server-pid-file.txt
+            nohup ./MediaScrapper --urls https://$HOST/ > /dev/null 2>&1 & echo $! > /root/repos/media-scrapper-server/.droplet-scripts/media-scrapper-server-pid-file.txt
             echo 'Deployment successful to digital ocean' 
