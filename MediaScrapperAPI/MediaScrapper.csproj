@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -20,7 +20,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\"/>
   </ItemGroup>
+  <Target Name="CopyWwwroot" AfterTargets="Build">
+    <ItemGroup>
+      <CopyItems Include="$(SolutionDir)\MediaScrapperAPI\wwwroot\**\*.*" />
+    </ItemGroup>
+    <Copy
+     SourceFiles="@(CopyItems)"
+     DestinationFolder=".\bin\$(Configuration)\$(TargetFramework)\wwwroot\%(RecursiveDir)"
+     SkipUnchangedFiles="false"
+     OverwriteReadOnlyFiles="true"
+     Retries="3"
+     RetryDelayMilliseconds="300"/>
+  </Target>
 
 </Project>

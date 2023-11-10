@@ -28,6 +28,8 @@ app.UseCors(policy =>
     .AllowAnyOrigin();
 });
 
+app.UseStaticFiles();
+app.MapFallbackToFile("index.html");
 app.MapAllEndpoints();
 app.UseHttpsRedirection();
 app.UseRouting();

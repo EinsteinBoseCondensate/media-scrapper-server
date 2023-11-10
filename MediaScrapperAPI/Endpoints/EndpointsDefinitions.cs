@@ -6,8 +6,6 @@ public static class EndpointsDefinitions
 {
     public static void MapAllEndpoints(this WebApplication app)
     {
-        app.MapGet("", () => "U+1F44D");
-
         app.MapPost("/videos", Videos.GetAsync);
 
         app.MapPost("/user-videos/create", UserVideos.CreateAsync)
@@ -18,6 +16,5 @@ public static class EndpointsDefinitions
 
         app.MapGet("/user-videos/read-by-user", UserVideos.ReadByUserAsync)
             .RequireAuthorization(DefaultAuthorizationPolicy.Name);
-
     }
 }
