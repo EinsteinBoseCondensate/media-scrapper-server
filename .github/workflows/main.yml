@@ -28,5 +28,5 @@ jobs:
             echo 'Altered config file with secrets'
             dotnet build --configuration Release
             echo 'App built'
-            nohup bin/Release/net7.0/MediaScrapper --urls https://$HOST/ > /dev/null 2>&1 & echo $! > ../.droplet-scripts/media-scrapper-server-pid-file.txt
+            nohup ./bin/Release/net7.0/MediaScrapper --urls https://$HOST/ > /dev/null 2>&1 & echo $! > ../.droplet-scripts/media-scrapper-server-pid-file.txt
             echo 'Deployment successful to digital ocean' 
