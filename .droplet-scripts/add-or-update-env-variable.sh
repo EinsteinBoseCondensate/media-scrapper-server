@@ -1,22 +1,18 @@
 #!/bin/bash
 
-pid_file="media-scrapper-server-pid-file.txt"
+variable_name=$1
+variable_value=$2
 
-# Check if the PID file exists and is not empty
-if [ -s "$pid_file" ]; then
-    # Read the PID from the file
-    pid=$(cat "$pid_file")
-
-    # Check if the process is still running
-    if ps -p "$pid" > /dev/null; then
-        echo "Process with PID $pid is running. Killing it."
-        kill "$pid"
-    else
-        echo "Process with PID $pid is not running."
-    fi
-
-    # Remove the PID file
-    rm "$pid_file"
+# Check if the variable already exists
+if grep -q "$variable_name=" /etc/environment; then
+    # Update the existing variable
+    sudo sed -i "s/^$variable_name=.*/$variable_name=$variable_value/" /etc/environment
+    echo "Updated $variable_name in /etc/environment"
 else
-    echo "PID file is empty or does not exist. Nothing to do."
+    # Add the new variable
+    echo "$variable_name=$variable_value" | sudo tee -a /etc/environment
+    echo "Added $variable_name to /etc/environment"
 fi
+
+# Load the new environment variables
+source /etc/environment
