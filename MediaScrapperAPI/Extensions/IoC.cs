@@ -35,9 +35,11 @@ public static partial class IoC
             .AddAuthentication()
             .AddJwtBearer(Auth0AuthenticationExtensionAuthorizationPolicy.RelatedAuthenticationScheme, options =>
             {
-                var issuerSigningKeyFromEnvironment = Environment.GetEnvironmentVariable(Constants.ASPNETCORE_ENVIRONMENT) == Environments.Development ?
-                Environment.GetEnvironmentVariable(Constants.CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE, EnvironmentVariableTarget.User) :
-                Environment.GetEnvironmentVariable(Constants.CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE, EnvironmentVariableTarget.Machine);
+                var issuerSigningKeyFromEnvironment = OperatingSystem.IsWindows() ? 
+                    Environment.GetEnvironmentVariable(Constants.ASPNETCORE_ENVIRONMENT) == Environments.Development ?
+                        Environment.GetEnvironmentVariable(Constants.CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE, EnvironmentVariableTarget.User) :
+                        Environment.GetEnvironmentVariable(Constants.CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE, EnvironmentVariableTarget.Machine) :
+                Environment.GetEnvironmentVariable(Constants.CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE);
 
                 if (string.IsNullOrEmpty(issuerSigningKeyFromEnvironment))
                     throw new Exception("Issuer signing key for custom signup process client was null while grabbing it from Environment.");
