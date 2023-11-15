@@ -21,11 +21,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scrapping", "Scrapping", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserVideos", "UserVideos", "{B2F31B8B-8DE8-4DCD-9789-704A08871514}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserVideos.Application", "UserVideos.Application\UserVideos.Application.csproj", "{C20C547C-E291-457A-9339-B80271A7EA40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserVideos.Application", "UserVideos.Application\UserVideos.Application.csproj", "{C20C547C-E291-457A-9339-B80271A7EA40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserVideos.Domain", "UserVideos.Domain\UserVideos.Domain.csproj", "{4DE82891-906E-41AB-B558-FD95906B0970}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserVideos.Domain", "UserVideos.Domain\UserVideos.Domain.csproj", "{4DE82891-906E-41AB-B558-FD95906B0970}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserVideos.Infrastructure", "UserVideos.Infrastructure\UserVideos.Infrastructure.csproj", "{9705D8A1-60A0-4894-B240-37A5FCECF40B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserVideos.Infrastructure", "UserVideos.Infrastructure\UserVideos.Infrastructure.csproj", "{9705D8A1-60A0-4894-B240-37A5FCECF40B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TetrisRating", "TetrisRating", "{FAC43872-8BAA-47E4-AA08-3DAD7E443A51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TetrisRating.Application", "TetrisRating.Application\TetrisRating.Application.csproj", "{6ED9C4FC-1477-4270-9B2C-3BC80CBFF2A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TetrisRating.Domain", "TetrisRating.Domain\TetrisRating.Domain.csproj", "{E0327720-3353-436B-8405-0746355297F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TetrisRating.Infrastructure", "TetrisRating.Infrastructure\TetrisRating.Infrastructure.csproj", "{A4B22360-836D-453D-8A4A-E7817EB2B5A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +81,18 @@ Global
 		{9705D8A1-60A0-4894-B240-37A5FCECF40B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9705D8A1-60A0-4894-B240-37A5FCECF40B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9705D8A1-60A0-4894-B240-37A5FCECF40B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED9C4FC-1477-4270-9B2C-3BC80CBFF2A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED9C4FC-1477-4270-9B2C-3BC80CBFF2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED9C4FC-1477-4270-9B2C-3BC80CBFF2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED9C4FC-1477-4270-9B2C-3BC80CBFF2A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0327720-3353-436B-8405-0746355297F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0327720-3353-436B-8405-0746355297F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0327720-3353-436B-8405-0746355297F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0327720-3353-436B-8405-0746355297F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B22360-836D-453D-8A4A-E7817EB2B5A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B22360-836D-453D-8A4A-E7817EB2B5A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B22360-836D-453D-8A4A-E7817EB2B5A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B22360-836D-453D-8A4A-E7817EB2B5A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +104,9 @@ Global
 		{C20C547C-E291-457A-9339-B80271A7EA40} = {B2F31B8B-8DE8-4DCD-9789-704A08871514}
 		{4DE82891-906E-41AB-B558-FD95906B0970} = {B2F31B8B-8DE8-4DCD-9789-704A08871514}
 		{9705D8A1-60A0-4894-B240-37A5FCECF40B} = {B2F31B8B-8DE8-4DCD-9789-704A08871514}
+		{6ED9C4FC-1477-4270-9B2C-3BC80CBFF2A4} = {FAC43872-8BAA-47E4-AA08-3DAD7E443A51}
+		{E0327720-3353-436B-8405-0746355297F2} = {FAC43872-8BAA-47E4-AA08-3DAD7E443A51}
+		{A4B22360-836D-453D-8A4A-E7817EB2B5A4} = {FAC43872-8BAA-47E4-AA08-3DAD7E443A51}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D0FCD95-71B8-4336-874D-C49FD4D17856}

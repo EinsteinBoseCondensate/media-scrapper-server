@@ -4,13 +4,13 @@ using MediaScrapper.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var appConfig = builder.Configuration.Get<AppConfig>();
+var appConfig = builder.Configuration.Get<AppConfig>() ?? new AppConfig();
 
 builder.Services.AddServices(appConfig);
 
 builder.Services.AddCors();
 
-builder.Services.AddAppAuthorizationPolicies();
+builder.Services.AddAppAuthorizationPolicies(appConfig);
 
 var app = builder.Build();
 

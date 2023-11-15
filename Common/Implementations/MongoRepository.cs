@@ -1,4 +1,5 @@
 ﻿using Common.Contracts;
+using Common.ServiceArguments;
 using MongoDB.Driver;
 using System.Linq.Expressions;
 
@@ -12,14 +13,20 @@ public class MongoRepository<T> : IRepository<T> where T : IEntity
         dbCollection = database.GetCollection<T>(collectionName);
     }
 
-    public Task<List<T>> GetAllAsync()
+    public Task<List<T>> GetAllAsync(PaginationParams<T>? paginationParams = null)
     {
-        return dbCollection.Find(filterBuilder.Empty).ToListAsync();
+        var findFluent = dbCollection.Find(filterBuilder.Empty);
+        if (paginationParams != null)
+            findFluent.SortBy(paginationParams.SortExpression).Skip(paginationParams.Skip).Limit(paginationParams.Limit);
+        return findFluent.ToListAsync();
     }
 
-    public Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter)
+    public Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter, PaginationParams<T>? paginationParams = null)
     {
-        return dbCollection.Find(filter).ToListAsync();
+        var findFluent = dbCollection.Find(filter);
+        if (paginationParams != null)
+            findFluent.SortBy(paginationParams.SortExpression).Skip(paginationParams.Skip).Limit(paginationParams.Limit);
+        return findFluent.ToListAsync();
     }
 
     public Task<T> GetAsync(Guid id)

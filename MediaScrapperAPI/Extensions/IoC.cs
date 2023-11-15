@@ -2,12 +2,15 @@
 using Common.Logging;
 using MediaScrapper.Authentication;
 using MediaScrapper.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using Scrapping.Application;
 using Scrapping.Domain;
+using System.Security.Claims;
+using System.Text;
 using UserVideos.Application.Create;
 using UserVideos.Application.Delete;
 using UserVideos.Application.Read.UserVideosByUser;
@@ -26,10 +29,39 @@ public static partial class IoC
             .AddUserVideosServices(appConfig);
     }
 
-    public static void AddAppAuthorizationPolicies(this IServiceCollection serviceCollection)
+    public static void AddAppAuthorizationPolicies(this IServiceCollection serviceCollection, AppConfig appConfig)
     {
-        serviceCollection.AddAuthorization(options =>
+        serviceCollection
+            .AddAuthentication()
+            .AddJwtBearer(Auth0AuthenticationExtensionAuthorizationPolicy.RelatedAuthenticationScheme, options =>
+            {
+                var issuerSigningKeyFromEnvironment = Environment.GetEnvironmentVariable(Constants.ASPNETCORE_ENVIRONMENT) == Environments.Development ?
+                Environment.GetEnvironmentVariable(Constants.CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE, EnvironmentVariableTarget.User) :
+                Environment.GetEnvironmentVariable(Constants.CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE, EnvironmentVariableTarget.Machine);
+                if (string.IsNullOrEmpty(issuerSigningKeyFromEnvironment))
+                    throw new Exception("Issuer signing key for custom signup process client was null while grabbing it from Environment.");
+
+                options.Authority = appConfig.Auth0SpaSettings?.Issuer ??
+                throw new Exception("Issuer for custom signup process client was null while grabbing it from AppConfig.");
+
+                options.TokenValidationParameters = new()
+                {
+                    NameClaimType = ClaimTypes.NameIdentifier,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(issuerSigningKeyFromEnvironment)),
+                    IssuerValidator = (issuer, _, _) => issuer == options.Authority ? issuer : options.Authority?.Replace("https://", "")
+                };
+            });
+
+        serviceCollection
+            .AddAuthorization(options =>
         {
+            options.AddPolicy(Auth0AuthenticationExtensionAuthorizationPolicy.Name,
+                options =>
+                {
+                    options.AuthenticationSchemes = new[] { Auth0AuthenticationExtensionAuthorizationPolicy.RelatedAuthenticationScheme };
+                    options.RequireAuthenticatedUser();
+                });
             options.AddPolicy(DefaultAuthorizationPolicy.Name, options =>
             {
                 options.RequireAssertion(DefaultAuthorizationPolicy.Delegate);
