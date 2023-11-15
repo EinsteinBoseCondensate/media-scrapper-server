@@ -24,6 +24,7 @@ jobs:
             echo 'Grabbed files from repo'
             cd .droplet-scripts
             bash media-scrapper-server-pid-file-handler.sh
+            chmod +x add-or-update-env-variable.sh
             bash add-or-update-env-variable.sh CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE $CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE
             cd ../MediaScrapperAPI
             jq --arg newValue "$MONGO_DB_CS" '(.MongoDbSettings.ConnectionString) |= $newValue' appsettings.json > /dev/null
