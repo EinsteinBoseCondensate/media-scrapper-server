@@ -30,6 +30,7 @@ public class GetTokenService : IGetTokenService
 
         try
         {
+            _logger.LogDebug($"Config: {Auth0M2MSettings.Serialize()}");
             _accessTokenResponse = await _authenticationApiClient.GetTokenAsync(new ClientCredentialsTokenRequest()
             {
                 Audience = Auth0M2MSettings.Audience,
@@ -39,7 +40,7 @@ public class GetTokenService : IGetTokenService
         }
         catch (Exception e)
         {
-            _logger.LogError($"Error grabbing accessTokenResponse, exception content was: {e.GetContent()}");
+            _logger.LogError($"Error grabbing accessTokenResponse, exception content was: {e}");
             throw;
         }
         _accessTokenResponseRetrievalTicks = DateTime.Now.Ticks;
