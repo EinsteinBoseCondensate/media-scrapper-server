@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Auth0.GetToken.Application\Auth0.GetToken.Application.csproj" />
+    <ProjectReference Include="..\Auth0.UpdateSignupFields.Application\Auth0.UpdateSignupFields.Application.csproj" />
     <ProjectReference Include="..\Scrapping.Application\Scrapping.Application.csproj" />
     <ProjectReference Include="..\Scrapping.Infrastructure\Scrapping.Infrastructure.csproj" />
     <ProjectReference Include="..\UserVideos.Application\UserVideos.Application.csproj" />
@@ -20,19 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\"/>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
   <Target Name="CopyWwwroot" AfterTargets="Build">
     <ItemGroup>
       <CopyItems Include="$(SolutionDir)\MediaScrapperAPI\wwwroot\**\*.*" />
     </ItemGroup>
-    <Copy
-     SourceFiles="@(CopyItems)"
-     DestinationFolder=".\bin\$(Configuration)\$(TargetFramework)\wwwroot\%(RecursiveDir)"
-     SkipUnchangedFiles="false"
-     OverwriteReadOnlyFiles="true"
-     Retries="3"
-     RetryDelayMilliseconds="300"/>
+    <Copy SourceFiles="@(CopyItems)" DestinationFolder=".\bin\$(Configuration)\$(TargetFramework)\wwwroot\%(RecursiveDir)" SkipUnchangedFiles="false" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
   </Target>
 
 </Project>

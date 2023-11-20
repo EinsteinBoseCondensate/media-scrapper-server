@@ -1,4 +1,4 @@
-﻿using MediaScrapper.Extensions;
+﻿using Common.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using UserVideos.Application.Common;
 using UserVideos.Application.Create;
@@ -26,11 +26,4 @@ public static class UserVideos
         [FromServices] IReadUserVideosByUserService readUserVideosByUserService,
         HttpContext context)
      => readUserVideosByUserService.HandleAsync(new ReadUserVideosByUserRequest().PopulateUserIdFromHttpContext(context));
-
-    private static TRequest PopulateUserIdFromHttpContext<TRequest>(this TRequest request, HttpContext context) 
-        where TRequest : UserBasedUserVideoBaseRequest
-    {
-        request.UserId = context.ExtractUserId();
-        return request;
-    }
 }

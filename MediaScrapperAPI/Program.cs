@@ -1,10 +1,26 @@
+using Common.Extensions;
 using MediaScrapper.Configuration;
 using MediaScrapper.Endpoints;
 using MediaScrapper.Extensions;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 var appConfig = builder.Configuration.Get<AppConfig>() ?? new AppConfig();
+
+if (Environment.GetEnvironmentVariable(Constants.ASPNETCORE_ENVIRONMENT) != Environments.Development && appConfig.UseLegitSslCertificate)
+{
+    builder.WebHost.UseKestrel(options =>
+    {
+        options.Listen(IPAddress.Any, 443, listenOptions =>
+        {
+            listenOptions.UseHttps(Environment.GetEnvironmentVariable("CERTIFICATE_PATH") ?? throw new Exception("missing path for SSL certificate"),
+                                   Environment.GetEnvironmentVariable("CERTIFICATE_PASSWORD"));
+        });
+    });
+}
+
 
 builder.Services.AddServices(appConfig);
 

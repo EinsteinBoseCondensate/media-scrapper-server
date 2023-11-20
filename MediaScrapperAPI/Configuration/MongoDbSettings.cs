@@ -3,5 +3,5 @@
 public class MongoDbSettings
 {
     public string UserVideosDatabaseName { get; init; } = "UserVideosDatabase";
-    public string? ConnectionString  { get; init; }
+    public string? ConnectionString { get; init; }
 }

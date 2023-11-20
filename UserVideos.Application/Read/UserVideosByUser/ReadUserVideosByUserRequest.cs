@@ -1,6 +1,7 @@
-﻿using UserVideos.Application.Common;
+﻿using Common.Models;
+using UserVideos.Application.Common;
 
 namespace UserVideos.Application.Read.UserVideosByUser;
-public class ReadUserVideosByUserRequest : UserBasedUserVideoBaseRequest
+public class ReadUserVideosByUserRequest : UserIdBasedRequest
 {
 }

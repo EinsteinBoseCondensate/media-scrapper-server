@@ -1,6 +1,8 @@
-﻿using System.Security.Claims;
+﻿
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
-namespace MediaScrapper.Extensions;
+namespace Common.Extensions;
 
 public static class Authentication
 {

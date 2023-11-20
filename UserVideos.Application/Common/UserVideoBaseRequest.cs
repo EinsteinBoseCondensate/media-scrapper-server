@@ -1,9 +1,7 @@
-﻿namespace UserVideos.Application.Common;
-public abstract class UserVideoBaseRequest : UserBasedUserVideoBaseRequest
+﻿using Common.Models;
+
+namespace UserVideos.Application.Common;
+public abstract class UserVideoBaseRequest : UserIdBasedRequest
 {
     public Guid Id { get; set; }
-}
-public abstract class UserBasedUserVideoBaseRequest
-{
-    public string? UserId { get; set; }
 }

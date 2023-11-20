@@ -16,5 +16,8 @@ public static class EndpointsDefinitions
 
         app.MapGet("/user-videos/read-by-user", UserVideos.ReadByUserAsync)
             .RequireAuthorization(DefaultAuthorizationPolicy.Name);
+
+        app.MapPost("/auth0/update-data", Auth0.UpdateAsync)
+            .RequireAuthorization(Auth0AuthenticationExtensionAuthorizationPolicy.Name);
     }
 }
