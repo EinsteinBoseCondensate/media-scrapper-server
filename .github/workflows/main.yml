@@ -30,12 +30,11 @@ jobs:
             bash add-or-update-env-variable.sh CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE $CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE
             chmod +x add-or-update-env-variable.sh
             bash add-or-update-env-variable.sh M2M_CLIENT_SECRET $AUTH0_M2M_CLIENT_SECRET
-            cd ../MediaScrapperAPI
-            jq --arg mongoDbCs "$MONGO_DB_CS" --arg auth0ClientId "$AUTH0_M2M_CLIENT_ID" '.MongoDbSettings.ConnectionString |= $mongoDbCs | .Auth0M2MSettings.ClientId |= $auth0ClientId' appsettings.json > appsettings.json.tmp
-            mv appsettings.json.tmp appsettings.json
-            echo 'Altered config file with secrets'
             dotnet build --configuration Release
             echo 'App built'
             cd bin/Release/net8.0/
+            jq --arg mongoDbCs "$MONGO_DB_CS" --arg auth0ClientId "$AUTH0_M2M_CLIENT_ID" '.MongoDbSettings.ConnectionString |= $mongoDbCs | .Auth0M2MSettings.ClientId |= $auth0ClientId' appsettings.json > appsettings.json.tmp
+            mv appsettings.json.tmp appsettings.json
+            echo 'Altered config file with secrets'
             nohup ./MediaScrapper --urls https://$HOST/ > /dev/null 2>&1 & echo $! > /root/repos/media-scrapper-server/.droplet-scripts/media-scrapper-server-pid-file.txt
             echo 'Deployment successful to digital ocean' 
