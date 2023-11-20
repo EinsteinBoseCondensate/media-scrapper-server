@@ -22,7 +22,7 @@
     <PackageReference Include="AngleSharp" Version="1.0.4" />
     <PackageReference Include="CSharpier.MsBuild" Version="0.25.0" PrivateAssets="all" />
     <PackageReference Include="Lazy.Fody" Version="1.11.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
