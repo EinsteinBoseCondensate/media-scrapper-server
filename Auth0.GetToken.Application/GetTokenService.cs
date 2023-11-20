@@ -30,7 +30,6 @@ public class GetTokenService : IGetTokenService
 
         try
         {
-            _logger.LogDebug($"Config: {Auth0M2MSettings.Serialize()}");
             _accessTokenResponse = await _authenticationApiClient.GetTokenAsync(new ClientCredentialsTokenRequest()
             {
                 Audience = Auth0M2MSettings.Audience,

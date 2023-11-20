@@ -9,8 +9,4 @@ public class Auth0M2MSettings : IAuth0M2MSettings
     public string? ServerDomain { get; set; }
     public string? Audience { get; set; }
     public string? ClientSecret { get; set; }
-    public Auth0M2MSettings()
-    {
-        ClientSecret = Constants.M2M_CLIENT_SECRET.GetEnvironmentVariableBasedOnOperativeSystem();
-    }
 }
