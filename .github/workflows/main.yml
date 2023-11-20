@@ -30,7 +30,7 @@ jobs:
             bash add-or-update-env-variable.sh CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE $CUSTOM_SIGNUP_FIELDS_ACTION_SECRETS_JWT_SIGNING_KEY_VALUE
             bash add-or-update-env-variable.sh M2M_CLIENT_SECRET $AUTH0_M2M_CLIENT_SECRET
             cd ../MediaScrapperAPI
-            jq --arg mongoDbCs "$MONGO_DB_CS" --args auth0ClienId "$AUTH0_M2M_CLIENT_ID" '(.MongoDbSettings.ConnectionString) |= $mongoDbCs | (.Auth0M2MSettings.ClientId) |= $auth0ClienId' appsettings.json > /dev/null
+            jq --arg mongoDbCs "$MONGO_DB_CS" --arg auth0ClienId "$AUTH0_M2M_CLIENT_ID" '(.MongoDbSettings.ConnectionString) |= $mongoDbCs | (.Auth0M2MSettings.ClientId) |= $auth0ClienId' appsettings.json > /dev/null
             echo 'Altered config file with secrets'
             dotnet build --configuration Release
             echo 'App built'
