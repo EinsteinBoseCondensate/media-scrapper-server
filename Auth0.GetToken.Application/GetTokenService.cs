@@ -9,7 +9,7 @@ public class GetTokenService : IGetTokenService
 {
     private readonly IAuthenticationApiClient _authenticationApiClient;
     private static AccessTokenResponse? _accessTokenResponse;
-    private readonly static long? _accessTokenResponseRetrievalTicks;
+    private static long? _accessTokenResponseRetrievalTicks;
     public IAuth0M2MSettings Auth0M2MSettings { get; private set; }
     public GetTokenService(IAuthenticationApiClient authenticationApiClient, IAuth0M2MSettings auth0M2MSettings)
     {
@@ -29,7 +29,7 @@ public class GetTokenService : IGetTokenService
             ClientId = Auth0M2MSettings.ClientId,
             ClientSecret = Auth0M2MSettings.ClientSecret
         }).ConfigureAwait(false);
-
+        _accessTokenResponseRetrievalTicks = DateTime.Now.Ticks;
         return _accessTokenResponse.AccessToken;
     }
 
